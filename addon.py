@@ -29,5 +29,7 @@ elif action == 'show_recording':
   show_recording(id, mediaId, name)
 elif action == 'show_settings':
   settings.open()
+elif action == 'channellist_reload': 
+  channellist_reload()  
 
 xbmcplugin.endOfDirectory(int(sys.argv[1]))

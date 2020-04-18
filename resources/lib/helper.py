@@ -129,7 +129,7 @@ def get_map():
     log(er, 4)
   return map
   
-def get_channels():
+def get_channels(force_reload=False):
   progress_bar = None
   channels = {}
   
@@ -152,7 +152,7 @@ def get_channels():
       with open(response_file, "w") as w:
         w.write(res.text)     
     
-    if settings.rebuild_cache or not os.path.isfile(channels_file) or is_cache_older_than(settings.refresh_interval):
+    if settings.rebuild_cache or not os.path.isfile(channels_file) or is_cache_older_than(settings.refresh_interval) or force_reload:
       progress_bar = xbmcgui.DialogProgressBG()
       progress_bar.create(heading="Канали")
       progress_bar.update(5, "Изграждане на списък с канали...")

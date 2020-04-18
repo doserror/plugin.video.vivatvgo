@@ -88,3 +88,8 @@ def show_recording(id, mediaId, name):
     
   else:
     notify_error("Не е намерен URL на видео поток!".encode('utf-8'), 2000)
+
+
+def channellist_reload(): 
+  get_channels(True)
+
