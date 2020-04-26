@@ -20,7 +20,7 @@ def show_channels():
     url = make_url({"action": "show_settings"})
     add_listitem(li, url)
 
-def show_channel(id):
+def show_channel(id, recursion=False):
   channel = get_channel(id)
   
   if channel and len(channel["playpaths"]) > 0:
@@ -36,6 +36,9 @@ def show_channel(id):
     add_listitem_folder("Записи", url)
   
   else:
+    if not recursion:
+      get_channels(True)
+      show_channel(id,True)
     notify_error("Не е намерен активен видео поток за канала или нямате абонамент за този канал!".encode('utf-8'), 2000)
 
 def show_days(id):
@@ -88,8 +91,4 @@ def show_recording(id, mediaId, name):
     
   else:
     notify_error("Не е намерен URL на видео поток!".encode('utf-8'), 2000)
-
-
-def channellist_reload(): 
-  get_channels(True)
 
